@@ -52,14 +52,14 @@ class KafkaExampleApplicationTests(
     ) {
 
         await().until {
-            val earliestOffsets = adminClient.listOffsets(
+            val offsets = adminClient.listOffsets(
                 mapOf(
                     topicPartition1 to offsetSpec,
                     topicPartition2 to offsetSpec,
                 )
             ).all().get()
-            earliestOffsets[topicPartition1]?.offset() == expectedOffset
-                    && earliestOffsets[topicPartition2]?.offset() == expectedOffset
+            offsets[topicPartition1]?.offset() == expectedOffset
+                    && offsets[topicPartition2]?.offset() == expectedOffset
         }
 
     }
